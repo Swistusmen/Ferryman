@@ -3,8 +3,8 @@
 const ResultTable=(props)=>{
     return(
         <div className="table-component">
-        <h3 className="table-title">{props.title}</h3>
         <table>
+            
             <tr>
                 <th>{""}</th>
                 <th>{props.o1}</th>
