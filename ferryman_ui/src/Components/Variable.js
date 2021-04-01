@@ -2,7 +2,7 @@
 const Variable=(props)=>{
     return(
         <div>
-            <table className="table">
+            <table className="table-component">
                 <tr>
                     <th>{""}</th>
                     <th>{"Dostawca 1"}</th>

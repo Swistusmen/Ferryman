@@ -2,8 +2,8 @@
 
 const ResultTable=(props)=>{
     return(
-        <div classname="table">
-        <tab classname="table-title">{props.title}</tab>
+        <div className="table-component">
+        <h3 className="table-title">{props.title}</h3>
         <table>
             <tr>
                 <th>{""}</th>
