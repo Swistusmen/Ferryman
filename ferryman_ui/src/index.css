@@ -43,6 +43,36 @@ table {
     margin-right: auto;
 }
 
+.submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    display: inline-block;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.submit:focus {
+    outline: none;
+}
+
+.submit:active {
+    transform: scale(0.98);
+}
+
+.submit-block {
+    display: block;
+    width: 100%;
+}
+
 body {
     background-color: white;
     margin: 0;
@@ -52,8 +82,4 @@ body {
     align-items: center;
     background-image: url("./industry.jpg");
     text-align: center;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
