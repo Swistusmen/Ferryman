@@ -13,22 +13,24 @@ class App extends React.Component {
     super();
     this.state={
       myVar: 0,
-      showOutput: false
+      showOutput: false,
+      variables:[0,0,0,0,0,0,0,0,0,0,0,0,]
     }
     
   };
   setShowOutput=()=>{this.state.showOutput= !this.state.showOutput}
 
-  parentCallback=(v11)=>{
-      this.state.myVar= v11;
-      console.log(this.state.myVar);
+  parentCallback=(v,b)=>{
+      this.state.variables[b]= parseInt(v,10);
+      console.log(this.state.variables);
+      console.log(b)
     }
 
 render(){
     return ( 
       <div className = "App" >
         <Header title={"Zadanie przewoznika"}/>
-        {!this.state.showOutput&&<Variable toFill={this.state.myVar} onCallback={this.parentCallback}/>}
+        {!this.state.showOutput&&<Variable onCallback={this.parentCallback} vars={this.variables}/>}
         {!this.state.showOutput&&<InputTable/>}
         {!this.state.showOutput&&<Submit onSubmit={()=>this.setShowOutput(!this.state.showOutput)} text={this.state.showOutput?"Reset":"Calculate"}
         style={this.state.showOutput?"grey":"green"}/>}
@@ -37,8 +39,8 @@ render(){
         {this.showOutput &&<Output expense="0" income="0" profit="0"/>}
         {this.showOutput&&<Submit onSubmit={()=>this.setShowOutput(!this.state.showOutput)} text={this.state.showOutput?"Reset":"Calculate"}
         style={this.state.showOutput?"grey":"green"}/>}
-        <button onClick={()=>{alert(this.state.myVar)}}/>
-          <h1>{this.state.myVar} </h1>
+        <button onClick={()=>{alert(this.state.variables)}}/>
+          <h1>{this.state.variables[0]} </h1>
       </div>
     );
 }
