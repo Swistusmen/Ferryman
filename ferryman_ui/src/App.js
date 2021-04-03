@@ -17,7 +17,9 @@ class App extends React.Component {
       variables:[0,0,0,0,0,0,0,0,0,0,0,0,],
       inputs:[0,0,0,0,0,0,0,0],
       out:[0,0,0,0,0,0,0,0],
-      money:[0,0,0]
+      money:[0,0,0],
+      res:null,
+      data: null,
     }
   };
   
@@ -39,22 +41,49 @@ class App extends React.Component {
     console.log(this.state.inputs);
   }
 
+checkItOut=async()=>{
+  this.state.res=await fetch(`http://127.0.0.1:8000/`)
+  this.state.data=await this.state.res.json()
+  console.log(this.state.data)
+  return this.state.data
+}
+
+ caluclate= async ()=>{
+  const res= await fetch(`http://127.0.0.1:8000/calculations`,{
+    method: "POST" ,
+     headers: {
+        "Content-type": "application/json"
+    },
+    body: JSON.stringify(this.state.variables.concat(this.state.inputs))
+  })
+  for(var i=0;i<this.state.inputs.length;i++)
+  {
+    this.state.inputs[i]=0;
+  }
+  for(var i=0;i<this.state.variables.length;i++)
+  {
+    this.state.variables[i]=0;
+  }
+  const data=await res.json()
+  this.state.out=data.values
+  this.state.money=data.money
+  this.setState(({showOutput})=>({showOutput: !showOutput}) )
+}
+
 render(){
     return ( 
       <div className = "App" >
         <Header title={"Zadanie przewoznika"}/>
         {!this.state.showOutput&&<Variable onCallback={this.changeVariables} vars={this.variables}/>}
         {!this.state.showOutput&&<InputTable onCallback={this.changeInputs} vars={this.inputs}/>}
-        {!this.state.showOutput&&<Submit onSubmit={()=>this.setShowOutput()} text={this.state.showOutput?"Reset":"Calculate"}
+        {!this.state.showOutput&&<Submit onSubmit={()=>this.caluclate()} text={this.state.showOutput?"Reset":"Calculate"}
         style={this.state.showOutput?"grey":"green"}/>}
         
         {this.state.showOutput &&<ResultTable title="Tablica kosztow jednostkowych" o1="odbiorca" o2="odbiorca" o3="odbiorca" o4="odbiorca" d1="dostawca" d1="dostawca"
         a1={this.state.out[0]} a2={this.state.out[1]} a3={this.state.out[2]} a4={this.state.out[3]} b1={this.state.out[4]} b2={this.state.out[5]} b3={this.state.out[6]} b4={this.state.out[7]}/>}
         {this.state.showOutput &&<Output expense={this.state.money[0]} income={this.state.money[1]} profit={this.state.money[2]}/>}
-        {this.state.showOutput &&<Submit onSubmit={()=>this.setShowOutput()} text={this.state.showOutput?"Reset":"Calculate"}
+        {this.state.showOutput &&<Submit onSubmit={()=>this.caluclate()} text={this.state.showOutput?"Reset":"Calculate"}
         style={this.state.showOutput?"grey":"green"}/>}
-        
-        
       </div>
     );
 }

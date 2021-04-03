@@ -1,0 +1,1 @@
+Script runs with fast api, to install it run pip install requerements.txt, or if it doesn't work pip install fastapi
