@@ -45,6 +45,39 @@ def plan_road_for_first_ride_balanced(data:CalculationData,profits: list):
                 demand_copy[i%4]-=supply_copy[int(i/4)]
                 supply_copy[int(i/4)]=0
     print(merch_on_road)
+    return merch_on_road
+
+def calculate_total_profit(gains: list, merch:list):
+    total_profit=0
+    for i in range(0,8):
+        total_profit+=gains[i]*merch[i]
+    return total_profit
+
+def dual_variables(profits:list, merch:list):
+    alfa=[0,"a"] 
+    beta=["a"]*4
+    for i in range(0,4):
+        if(merch[i]!=0):
+            beta[i]=profits[i]-alfa[0]
+    for i in range(4,8):
+        if(merch[i]!=0):
+            alfa[1]=profits[i]-beta[i-4]
+            break
+    for i in range(0,4):
+        if ((type(beta[i]) is not int)):
+            beta[i]=profits[i+4]-alfa[1]
+    return alfa+beta
+
+def calculate_deltas(merch:list, duals:list,profits:list):
+    deltas=[0]*8
+    for i in range(0,8):
+        if(merch[i]!=0):
+            continue
+        a=0
+        if(i>3):
+            a=1
+        deltas[i]=profits[i]-duals[a]-duals[i%4+2]
+    return deltas
 
         
 
@@ -55,4 +88,8 @@ my_list=[60,40,10,40,20,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 data=CalculationData(my_list)
 
 gains=[4,1,6,7,2,4,10,3]
-plan_road_for_first_ride_balanced(data,gains)
+profit=plan_road_for_first_ride_balanced(data,gains)
+zysk=calculate_total_profit(gains,profit)
+print(zysk)
+duals=dual_variables(gains,profit)
+calculate_deltas(profit,duals,gains)
