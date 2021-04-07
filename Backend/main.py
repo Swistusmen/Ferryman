@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from CalculationData import CalculationData
 from fastapi.middleware.cors import CORSMiddleware
+from find_solution import find_solution
 
 app=FastAPI()
 
@@ -27,6 +28,7 @@ def hello_world():
 def calculate(inputs: list):
     print(len(inputs))
     myData=CalculationData(inputs)
+    myData=find_solution(myData)
     myData.printt()
     print(inputs)
     myAnswer=[1,2,3,4,5,6,7,8]
