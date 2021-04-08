@@ -31,10 +31,8 @@ def plan_road_for_first_ride_balanced(data:CalculationData,profits: list):
     order.sort(key=comparator, reverse=True)
     demand_copy=data.popyt.copy()
     supply_copy=data.podaz.copy()
-    print(order)
     for j in range(0,7):
         i=order[j][0]
-        print(i)
         if((supply_copy[int(i/4)]>0)and(demand_copy[i%4]>0)):
             if(supply_copy[int(i/4)]>=demand_copy[i%4]):
                 merch_on_road[i]=demand_copy[i%4]
@@ -44,7 +42,6 @@ def plan_road_for_first_ride_balanced(data:CalculationData,profits: list):
                 merch_on_road[i]=supply_copy[int(i/4)]
                 demand_copy[i%4]-=supply_copy[int(i/4)]
                 supply_copy[int(i/4)]=0
-    print(merch_on_road)
     return merch_on_road
 
 def calculate_total_profit(gains: list, merch:list):
@@ -98,18 +95,27 @@ def improve_road_plan(deltas:list,profits:list, data:CalculationData,merch:list)
     horizontal_next=-1
     horizontal_cross=-1
     for i in range(0,4):
-        if(deltas[i]==0 and deltas[i*2]==0):
+        if(deltas[i]==0 and deltas[i+4]==0):
             if to_provide>3:
-                horizontal_next=i*2
+                horizontal_next=i+4
                 horizontal_cross=i
             else:
                 horizontal_next=i
-                horizontal_cross=i*2
-    if (profits[horizontal_next]>profits[vertical]):
-        how_much=data.popyt[to_provide%4]
+                horizontal_cross=i+4
+    how_much=data.popyt[to_provide%4]
+    if (profits[horizontal_next]<profits[vertical]):
         if how_much>merch[horizontal_next]:
                 how_much=merch[horizontal_next]
-        
+    else:
+        if how_much>merch[vertical]:
+                how_much=merch[vertical]           
+    merch[to_provide]+=how_much
+    merch[horizontal_next]-=how_much
+    merch[vertical]-=how_much
+    merch[horizontal_cross]+=how_much
+    return merch
+    
+
 
     
     
@@ -142,4 +148,15 @@ duals=dual_variables(gains,profit)
 print(duals)
 deltas=calculate_deltas(profit,duals,gains)
 print(deltas)
+print(earnings_can_be_increased(deltas))
+
+profit=improve_road_plan(deltas,gains,data,profit)
+print(profit)
+zysk=calculate_total_profit(gains,profit)
+print(zysk)
+duals=dual_variables(gains,profit)
+print(duals)
+deltas=calculate_deltas(profit,duals,gains)
+print(deltas)
+print(earnings_can_be_increased(deltas))
 
