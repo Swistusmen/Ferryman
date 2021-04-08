@@ -44,10 +44,10 @@ def plan_road_for_first_ride_balanced(data:CalculationData,profits: list):
                 supply_copy[int(i/4)]=0
     return merch_on_road
 
-def calculate_total_profit(gains: list, merch:list):
+def calculate_total_profit(profits: list, merch:list):
     total_profit=0
     for i in range(0,8):
-        total_profit+=gains[i]*merch[i]
+        total_profit+=profits[i]*merch[i]
     return total_profit
 
 def dual_variables(profits:list, merch:list):

@@ -5,8 +5,8 @@ class CalculationData():
         self.popyt=[]
         for i in range(2,6):
             self.popyt.append(dataFromFront[i])
-        self.cena=[dataFromFront[6],dataFromFront[7]]
-        self.koszt=[]
+        self.cena=[dataFromFront[6],dataFromFront[7]] #cena sprzedazy towaru do odbiorcy
+        self.koszt=[] #koszt zakupu towaru przez posrednika
         for i in range(8,12):
             self.koszt.append(dataFromFront[i])
         self.transport_d1=[]
@@ -15,7 +15,7 @@ class CalculationData():
         self.transport_d2=[]
         for i in range(16,20):
             self.transport_d2.append(dataFromFront[i])
-        self.zyski=[1,2,3,4,5,6,7,8]
+        self.zyski=[]
         self.koszt_calkowity=0
         self.przychod_calkowity=0
         self.zysk_calkowity=0

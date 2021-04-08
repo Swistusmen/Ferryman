@@ -26,12 +26,7 @@ def hello_world():
 
 @app.post("/calculations")
 def calculate(inputs: list):
-    print(len(inputs))
     myData=CalculationData(inputs)
     myData=find_solution(myData)
-    myData.printt()
-    print(inputs)
-    myAnswer=[1,2,3,4,5,6,7,8]
-    money=[111,222,333]
     return {"message":"Hello world","values":myData.zyski,"money":myData.money()}
     
