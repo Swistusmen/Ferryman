@@ -6,7 +6,7 @@ def check_if_solution_is_balanced(data:CalculationData):
         whole_demand+=i
     whole_supply=0
     for i in data.podaz:
-        whole_demand+=i
+        whole_supply+=i
     return whole_demand-whole_supply
 
 def calculate_profits_on_road(data:CalculationData):
@@ -62,6 +62,8 @@ def dual_variables(profits:list, merch:list):
             break
     for i in range(0,4):
         if ((type(beta[i]) is not int)):
+            print(type(profits[i+4]))
+            print(type(alfa[1]))
             beta[i]=profits[i+4]-alfa[1]
     return alfa+beta
 
@@ -114,49 +116,17 @@ def improve_road_plan(deltas:list,profits:list, data:CalculationData,merch:list)
     merch[vertical]-=how_much
     merch[horizontal_cross]+=how_much
     return merch
-    
-
-
-    
-    
-
-        
-
-
 
 '''
 #balanced, solved within 1 iteration
 my_list=[60,40,10,40,20,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-data=CalculationData(my_list)
-
 gains=[4,1,6,7,2,4,10,3]
-profit=plan_road_for_first_ride_balanced(data,gains)
-zysk=calculate_total_profit(gains,profit)
-print(zysk)
-duals=dual_variables(gains,profit)
-calculate_deltas(profit,duals,gains)
+
 '''
 #balanced solved within 2 iterations
+'''
 my_list_2=[70,30,25,10,25,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 gains=[7,6,0,2,10,7,8,5]
-data=CalculationData(my_list_2)
-profit=plan_road_for_first_ride_balanced(data,gains)
-print(profit)
-zysk=calculate_total_profit(gains,profit)
-print(zysk)
-duals=dual_variables(gains,profit)
-print(duals)
-deltas=calculate_deltas(profit,duals,gains)
-print(deltas)
-print(earnings_can_be_increased(deltas))
+'''
 
-profit=improve_road_plan(deltas,gains,data,profit)
-print(profit)
-zysk=calculate_total_profit(gains,profit)
-print(zysk)
-duals=dual_variables(gains,profit)
-print(duals)
-deltas=calculate_deltas(profit,duals,gains)
-print(deltas)
-print(earnings_can_be_increased(deltas))
 

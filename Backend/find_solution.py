@@ -3,11 +3,11 @@ from basic_calculations import *
 #file which is real main- here we're going to glue all the functions
 
 def find_solution(data: CalculationData):
-    #profits=calculate_profits_on_road(data)
-    profits=[7,6,0,2,10,7,8,5]
+    profits=calculate_profits_on_road(data)
+    #profits=[7,6,0,2,10,7,8,5]
     balance=check_if_solution_is_balanced(data)
-    balance=0
     if (balance==0):
+        print("hello")
         merch=plan_road_for_first_ride_balanced(data,profits)
         total_profit=calculate_total_profit(profits,merch)
         duals=dual_variables(profits,merch)
@@ -23,7 +23,7 @@ def find_solution(data: CalculationData):
         data.zysk_calkowity=total_profit
         data.koszt_calkowity=0
         data.przychod_calkowity=0
-        return data
+    return data
 
 
 
