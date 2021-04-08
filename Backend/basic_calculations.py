@@ -60,7 +60,7 @@ def dual_variables(profits:list, merch:list):
         if(merch[i]!=0):
             beta[i]=profits[i]-alfa[0]
     for i in range(4,8):
-        if(merch[i]!=0):
+        if(merch[i]!=0) and (type(beta[i-4]) is int):
             alfa[1]=profits[i]-beta[i-4]
             break
     for i in range(0,4):
@@ -79,11 +79,47 @@ def calculate_deltas(merch:list, duals:list,profits:list):
         deltas[i]=profits[i]-duals[a]-duals[i%4+2]
     return deltas
 
+def earnings_can_be_increased(deltas: list):
+    for i in deltas:
+        if(i>0):
+            return True
+    return False
+
+def improve_road_plan(deltas:list,profits:list, data:CalculationData,merch:list):
+    to_provide=-1
+    for i in range(0,8):
+        if(deltas[i]>0):
+            to_provide=i
+    vertical=-1
+    if to_provide>3:
+        vertical=to_provide-4
+    else:
+        vertical=to_provide+4
+    horizontal_next=-1
+    horizontal_cross=-1
+    for i in range(0,4):
+        if(deltas[i]==0 and deltas[i*2]==0):
+            if to_provide>3:
+                horizontal_next=i*2
+                horizontal_cross=i
+            else:
+                horizontal_next=i
+                horizontal_cross=i*2
+    if (profits[horizontal_next]>profits[vertical]):
+        how_much=data.popyt[to_provide%4]
+        if how_much>merch[horizontal_next]:
+                how_much=merch[horizontal_next]
+        
+
+    
+    
+
         
 
 
 
-
+'''
+#balanced, solved within 1 iteration
 my_list=[60,40,10,40,20,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 data=CalculationData(my_list)
 
@@ -93,3 +129,17 @@ zysk=calculate_total_profit(gains,profit)
 print(zysk)
 duals=dual_variables(gains,profit)
 calculate_deltas(profit,duals,gains)
+'''
+#balanced solved within 2 iterations
+my_list_2=[70,30,25,10,25,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+gains=[7,6,0,2,10,7,8,5]
+data=CalculationData(my_list_2)
+profit=plan_road_for_first_ride_balanced(data,gains)
+print(profit)
+zysk=calculate_total_profit(gains,profit)
+print(zysk)
+duals=dual_variables(gains,profit)
+print(duals)
+deltas=calculate_deltas(profit,duals,gains)
+print(deltas)
+
