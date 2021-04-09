@@ -9,16 +9,16 @@ We get: maximum profit and how our roads should look like to achive maximum prof
 
 <h3>how to run?</h3>
 a) backend
+
 ```
 cd Backend
 hypercorn main:app --reload
 ```
 b) front end
+
 ```
 cd ferryman_ui/src
 yarn start
 ```
 
-```
-std::cout<<"Hello world\n";
-```
+
