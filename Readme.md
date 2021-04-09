@@ -2,11 +2,11 @@
 
 Application created to solve logistic problem which is: Middleman (wrongly translated by me as ferryman).
 Problem is to find maximum profit for broker/middleman. Variables are: 
--Cost of transport on a road
--cost of buing
--cost of selling
--demand
--supply
+*Cost of transport on a road
+*cost of buing
+*cost of selling
+*demand
+8supply
 
 We get: 
 -maximum profit
