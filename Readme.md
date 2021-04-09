@@ -1,8 +1,16 @@
 <h1>Ferryman app</h1>
 
 Application created to solve logistic problem which is: Middleman (wrongly translated by me as ferryman).
-Problem is to find maximum profit for broker/middleman. Variables are: Cost of transport on a road, cost of buing, cost of selling, demand and supply.
-We get: maximum profit and how our roads should look like to achive maximum profit
+Problem is to find maximum profit for broker/middleman. Variables are: 
+-Cost of transport on a road
+-cost of buing
+-cost of selling
+-demand
+-supply
+
+We get: 
+-maximum profit
+-merch on every road to get maximum profit
 
 <h3>Stack:</h3>
 
