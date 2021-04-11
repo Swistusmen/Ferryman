@@ -22,7 +22,7 @@ We get:
 -merch on every road to get maximum profit
 
 <h3>Stack:</h3>
-!.[.].(/pictures/fastapi.png)
+![](/pictures/fastapi.png)
 
 <h3>how to run?</h3>
 a) backend
