@@ -29,9 +29,8 @@ def calculate(inputs: list):
     print(inputs)
     myData=CalculationData(inputs)
     myData.printt()
-    myData=find_solution(myData)
-    print(type(myData))
-    print(myData.zyski)
-    print(myData.money())
-    return {"message":"Hello world","values":myData.zyski,"money":myData.money()}
+    #myData=find_solution(myData)
+    outputData=find_solution(myData)
+    #return {"message":"Hello world","values":myData.zyski,"money":myData.money()}
+    return outputData
     

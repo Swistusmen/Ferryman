@@ -5,8 +5,7 @@ import InputTable from "./Components/InputTable"
 import Output from "./Components/Output"
 import Submit from "./Components/Submit"
 import React, {useState, Component } from 'react'
-
-
+import OptimizationHistory from "./Components/OptimizationHistory"
 
 class App extends React.Component {
   constructor(){
@@ -20,6 +19,7 @@ class App extends React.Component {
       money:[0,0,0],
       res:null,
       data: null,
+      tables: []
     }
   };
   
@@ -67,8 +67,17 @@ checkItOut=async()=>{
     this.state.variables[i]=0;
   }
   const data=await res.json()
-  this.state.out=data.values
-  this.state.money=data.money
+  
+  this.state.out=data.tables[data.iterations-1][1]
+  this.state.money=[data.total_cost,data.total_income,data.total_profit]
+  for(var i=0;i<data.iterations;i++)
+  {
+    this.state.tables.push([data.tables[i][0],data.tables[i][1],data.tables[i][2],
+      data.tables[i][3],data.tables[i][4],data.tables[i][5],data.tables[i][6],data.tables[i][7]
+    ])
+  }
+  
+  console.log(this.state.tables)
   console.log(this.state.out)
   console.log(this.state.money)
 }else{
@@ -92,6 +101,7 @@ render(){
         {this.state.showOutput &&<Output expense={this.state.money[0]} income={this.state.money[1]} profit={this.state.money[2]}/>}
         {this.state.showOutput &&<Submit onSubmit={()=>this.calculate()} text={this.state.showOutput?"Reset":"Calculate"}
         style={this.state.showOutput?"grey":"green"}/>}
+        {this.state.showOutput && <OptimizationHistory tables={this.state.tables}/>}
       </div>
     );
 }
