@@ -31,6 +31,7 @@ def calculate(inputs: list):
     myData.printt()
     #myData=find_solution(myData)
     outputData=find_solution(myData)
+    print(outputData)
     #return {"message":"Hello world","values":myData.zyski,"money":myData.money()}
     return outputData
     
